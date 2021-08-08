@@ -1,4 +1,6 @@
 {
     "board": "arduino:avr:leonardo",
-    "port": "/dev/tty.usbmodem14601"
+    "port": "/dev/tty.usbmodem14601",
+    "sketch": "ButtonsTrail.ino",
+    "output": "../build"
 }

@@ -25,10 +25,11 @@ class Arrow {
     public:
 
         void init(uint8_t x, uint8_t y) {
-            
+
             this->x = x;
             this->y = y;
             this->yOffset = 0;
+            this->direction = Direction::Down;
 
         }
 

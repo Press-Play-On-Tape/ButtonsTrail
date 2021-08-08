@@ -6,8 +6,8 @@
 void game_Init() {
 
     gameStats.reset();
-    initGame(gameStats.level);
     gameState = GameState::Game;
+    gameStats.xOffset = 132;
     
 }   
 
@@ -257,8 +257,8 @@ void renderBoard() {
 
     for (Arrow &arrow : arrows) {
 
-        if (arrow.getX() > 0 && arrow.getY() > 0) {
-
+        if (arrow.getX() > 0 || arrow.getY() > 0) {
+     
             Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (arrow.getX() * Constants::CellWidth_PlusBorder) - 1, 
                                       Constants::Board_YOffset + (arrow.getY() * Constants::CellWidth_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
                                       Images::Arrow, Images::Arrow_Mask, 0, 0);
@@ -315,9 +315,9 @@ bool endOfGame() {
 
     if (gameStats.xOffset == 0 && !player.isMoving()) {
 
-        for (uint16_t y = 0; y < Constants::BoardHeight; y++) {
+        for (int16_t y = 0; y < Constants::BoardHeight; y++) {
 
-            for (uint16_t x = 0; x < Constants::BoardWidth; x++) {
+            for (int16_t x = 0; x < Constants::BoardWidth; x++) {
 
                 if (x == player.getX() && y == player.getY()) {
 
