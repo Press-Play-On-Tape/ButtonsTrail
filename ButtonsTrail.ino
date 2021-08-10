@@ -56,6 +56,15 @@ void loop() {
             title();
             break;
 
+        case GameState::Instructions_Init:
+            instructions_Init();
+            instructions();
+            break;
+
+        case GameState::Instructions:
+            instructions();
+            break;
+
         case GameState::Game_Init:
             game_Init();
             game();
