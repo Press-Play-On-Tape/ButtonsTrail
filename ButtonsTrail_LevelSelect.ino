@@ -37,6 +37,12 @@ void levelSelect() {
 
     }
 
+    if (arduboy.justPressed(B_BUTTON)) {
+
+        gameState = GameState::Title_Init; 
+
+    }
+
     if (arduboy.justPressed(UP_BUTTON) && levelSelectVars.cursor > 0) {
 
         levelSelectVars.cursor--;

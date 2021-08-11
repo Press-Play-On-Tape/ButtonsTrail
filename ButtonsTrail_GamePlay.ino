@@ -50,11 +50,9 @@ void game() {
 
     // Handle player movements ..
 
-
-// if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
-// if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
-// if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
-
+    // if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
+    // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
+    // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
     
     if (arduboy.pressed(B_BUTTON)) { // Exit
 
@@ -135,9 +133,9 @@ void game() {
         else if (gameStats.moves < gameStats.minimumMoves * 3)      { stars = 1; }
         else                                                        { stars = 0; }
 
-        Sprites::drawExternalMask(44, 20, (stars > 0 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
+        Sprites::drawExternalMask(45, 20, (stars > 0 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
         Sprites::drawExternalMask(59, 20, (stars > 1 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
-        Sprites::drawExternalMask(74, 20, (stars > 2 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
+        Sprites::drawExternalMask(73, 20, (stars > 2 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
 
         Sprites::drawOverwrite(22, 32, Images::Congratulations, 0);
         eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level + 1);
