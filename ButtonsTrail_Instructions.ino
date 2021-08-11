@@ -99,7 +99,7 @@ void instructions() {
             font3x5.setCursor(0, 13);
             font3x5.print("Button Switches");
 
-            Sprites::drawOverwrite(0, 27, Images::Tiles, 6);
+            Sprites::drawOverwrite(0, 27, Images::Tiles, 5);
             font3x5.setCursor(10, 27);
             font3x5.print("Off:~switch~is~in~OFF~position.");
 
