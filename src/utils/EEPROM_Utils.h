@@ -32,11 +32,16 @@ void EEPROM_Utils::initEEPROM(bool forceClear) {
         eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Char1), 'B');
         eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Char2), 'T');
         eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), 0);
-        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), 0);
+        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), 0);//SJH 6
 
         for (uint8_t x = 0; x < 50; x++) {
     
-            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + x), 0);
+            // if (x <= 6) {//SJH
+            //     eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + x), random(0, 3));//SJH
+            // }//SJH
+            // else {//SJH
+                eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + x), 0);
+            // }//SJH
 
         }
 

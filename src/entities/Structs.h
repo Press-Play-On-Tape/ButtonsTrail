@@ -9,6 +9,8 @@ struct GameStats {
         GameStats() { };
 
         uint8_t level = 0;
+        uint8_t maxLevel = 0;
+        
         uint8_t titleSel = 0;
         int16_t xOffset = 0;
         uint8_t yOffset = 0;
@@ -16,6 +18,7 @@ struct GameStats {
         uint8_t minimumMoves = 0;
         uint8_t instruction = 0;
         uint8_t start = 0;
+        uint8_t exit = 0;
 
         void reset() {
 
@@ -24,5 +27,19 @@ struct GameStats {
             this->titleSel = level > 0 ? 1 : 0;
 
         }
+
+};
+
+
+struct LevelSelectVars {
+
+    public: 
+
+        LevelSelectVars() { };
+
+        uint8_t cursor = 0;
+        uint8_t cursorFlashTop = 0;
+        uint8_t cursorFlashBottom = 0;
+        uint8_t topRow = 0;
 
 };

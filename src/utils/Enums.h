@@ -11,11 +11,11 @@ namespace Constants {
     constexpr uint8_t Board_XOffset = 12;
     constexpr uint8_t Board_YOffset = 12;
 
-    constexpr uint16_t EEPROM_Char1 = 28;
-    constexpr uint16_t EEPROM_Char2 = 29;
-    constexpr uint16_t EEPROM_Level_Current = 30;
-    constexpr uint16_t EEPROM_Level_Max = 31;
-    constexpr uint16_t EEPROM_Level_Rating = 32;
+    constexpr uint16_t EEPROM_Char1 = 27;
+    constexpr uint16_t EEPROM_Char2 = EEPROM_Char1 + 1;
+    constexpr uint16_t EEPROM_Level_Current = EEPROM_Char1 + 2;
+    constexpr uint16_t EEPROM_Level_Max = EEPROM_Char1 + 3;
+    constexpr uint16_t EEPROM_Level_Rating = EEPROM_Char1 + 4;
 
 }
 
@@ -24,6 +24,8 @@ enum class GameState : uint8_t {
     Splash,
     Title_Init,
     Title,
+    LevelSelect_Init,
+    LevelSelect,
     Instructions_Init,
     Instructions,
     Game_Init,

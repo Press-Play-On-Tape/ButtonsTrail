@@ -8,6 +8,7 @@ void game_Init() {
     gameStats.reset();
     gameState = GameState::Game;
     gameStats.xOffset = 132;
+    gameStats.exit = 0;
     
 }   
 
@@ -16,6 +17,8 @@ void game_Init() {
 //  Handle state updates .. 
 //
 void game() {
+
+    bool isEndOfGame = endOfGame();
 
 
     // Update scrolling motion ..
@@ -47,11 +50,29 @@ void game() {
 
     // Handle player movements ..
 
-if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
-if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
-if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
 
-    if (gameStats.xOffset == 0 && !player.isMoving()) {
+// if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
+// if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
+// if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
+
+    
+    if (arduboy.pressed(B_BUTTON)) { // Exit
+
+        gameStats.exit++;
+
+        if (gameStats.exit > 32) {
+
+            gameState = GameState::Title_Init;
+
+        }
+    }
+    else {
+
+        gameStats.exit = 0;
+
+    }
+
+    if (gameStats.xOffset == 0 && !player.isMoving() && !isEndOfGame) {
 
         if (arduboy.justPressed(LEFT_BUTTON) && player.getX() > -1)                             { player.moveLeft();   gameStats.moves++;   removeTile(); } 
         else if (arduboy.justPressed(RIGHT_BUTTON) && player.getX() < Constants::BoardWidth)    { player.moveRight();  gameStats.moves++;   removeTile(); } 
@@ -72,7 +93,8 @@ if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.l
             
     // Render board ..
 
-    renderBoard();
+    if (!isEndOfGame) renderBoard();
+    renderHUD();
 
 
     // Update the game state ..
@@ -104,17 +126,33 @@ if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.l
         
     }
 
-    if (endOfGame()) {
+    if (isEndOfGame) {
 
-        gameStats.xOffset = 4;
-        gameStats.level++;
-        gameStats.moves = 0;
+        uint8_t stars = 0;
 
-        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level);
+        if (gameStats.moves < gameStats.minimumMoves + 2)           { stars = 3; }
+        else if (gameStats.moves < gameStats.minimumMoves * 1.5)    { stars = 2; }
+        else if (gameStats.moves < gameStats.minimumMoves * 3)      { stars = 1; }
+        else                                                        { stars = 0; }
 
-        uint8_t maxlevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max));
-        if (maxlevel < gameStats.level) {
-            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), gameStats.level);
+        Sprites::drawExternalMask(44, 20, (stars > 0 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
+        Sprites::drawExternalMask(59, 20, (stars > 1 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
+        Sprites::drawExternalMask(74, 20, (stars > 2 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
+
+        Sprites::drawOverwrite(22, 32, Images::Congratulations, 0);
+        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level + 1);
+        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + gameStats.level), stars);
+
+        if (gameStats.maxLevel < gameStats.level + 1) {
+            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), gameStats.level + 1);
+        }
+
+        if (arduboy.justPressed(A_BUTTON)) {
+
+            gameStats.xOffset = 4;
+            gameStats.level++;
+            gameStats.moves = 0;
+
         }
 
     }
@@ -233,7 +271,6 @@ void initGame(uint8_t level) {
     }
 
     gameStats.yOffset = count == Constants::BoardWidth ? 6 : 0;
-    gameStats.moves = 0; // SJH remove
 
 }
 
@@ -272,10 +309,10 @@ void renderBoard() {
     for (Arrow &arrow : arrows) {
 
         if (arrow.getX() > 0 || arrow.getY() > 0) {
-     
+    
             Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (arrow.getX() * Constants::CellWidth_PlusBorder) - 1, 
-                                      Constants::Board_YOffset + (arrow.getY() * Constants::CellWidth_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
-                                      Images::Arrow, Images::Arrow_Mask, 0, 0);
+                                    Constants::Board_YOffset + (arrow.getY() * Constants::CellWidth_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
+                                    Images::Arrow, Images::Arrow_Mask, 0, 0);
 
 
         }
@@ -321,6 +358,10 @@ void renderBoard() {
         
     }
 
+}
+
+
+void renderHUD() {
 
     Sprites::drawOverwrite(0, 0, Images::Level, 0);
 
@@ -328,23 +369,18 @@ void renderBoard() {
         uint8_t digits[3] = {};
         uint8_t x = 45;
 
-        // for (uint8_t i = 0; i < 3; ++i) {
-
-        //     if (digits[i] == 1) x = x - 3;
-
-        // }
-
         extractDigits(digits, gameStats.level);
-Serial.println("ddd--------");        
+
+        for (uint8_t i = 0; i < 3; ++i) {
+
+            if (digits[i] == 1) x = x - 3;
+
+        }
+
         for (uint8_t i = 0; i < 3; ++i) {
             Sprites::drawOverwrite(x, 0, Images::Numbers, digits[i]);
             x = x - (digits[i] == 1 ? 5 : 8);
-Serial.print(" ");        
-Serial.print(digits[i]); 
-Serial.print(" ");        
-Serial.print(x);            
         }
-Serial.println("");        
 
     }
 
@@ -355,13 +391,13 @@ Serial.println("");
         uint8_t digits[3] = {};
         uint8_t x = 121;
 
+        extractDigits(digits, gameStats.moves < 999 ? gameStats.moves : 999);
+
         for (uint8_t i = 0; i < 3; ++i) {
 
             if (digits[i] == 1) x = x - 3;
 
         }
-
-        extractDigits(digits, gameStats.moves < 999 ? gameStats.moves : 999);
         
         for (uint8_t i = 0; i < 3; ++i) {
             Sprites::drawOverwrite(x, 0, Images::Numbers, digits[i]);

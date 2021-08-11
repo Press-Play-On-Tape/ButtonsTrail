@@ -3,4 +3,4 @@
 #include "Arrow.h"
 #include "FallingTile.h"
 #include "Player.h"
-#include "GameStats.h"
+#include "Structs.h"

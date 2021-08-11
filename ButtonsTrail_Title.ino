@@ -5,10 +5,12 @@
 //
 void title_Init() {
 
-    uint8_t level = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current));
+    uint8_t maxLevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max));
+    uint8_t curlevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current));
 
-    gameStats.titleSel = level > 0 ? 1 : 0;
-    gameStats.level = level;
+    gameStats.titleSel = maxLevel > 0 ? 1 : 0;
+    gameStats.maxLevel = maxLevel;
+    gameStats.level = curlevel;
     
     gameState = GameState::Title;
     
@@ -29,7 +31,7 @@ void title() {
 
     }         
 
-    if (arduboy.justPressed(RIGHT_BUTTON) && gameStats.level > 0) { 
+    if (arduboy.justPressed(RIGHT_BUTTON) && gameStats.maxLevel > 0) { 
 
         gameStats.titleSel = 1;
 
@@ -41,12 +43,13 @@ void title() {
             gameStats.level = 0;
             gameStats.instruction = 0;
             gameState = GameState::Instructions_Init;
+            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level);
         }
         else {
-            gameState = GameState::Game_Init;
+            gameState = GameState::LevelSelect_Init;
         }
 
-        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level);
+        // eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level);
 
     }         
 
@@ -56,7 +59,7 @@ void title() {
     Sprites::drawOverwrite(9, 9, Images::Title, 0);
     Sprites::drawOverwrite(25, 49, Images::Title_New, 0);
 
-    if (gameStats.level > 0) {
+    if (gameStats.maxLevel > 0) {
      
         Sprites::drawOverwrite(68, 49, Images::Title_Continue, 0);
 

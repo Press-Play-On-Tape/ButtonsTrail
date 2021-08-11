@@ -13,10 +13,10 @@ Arduboy2Ext arduboy;
 Font3x5 font3x5 = Font3x5();
 GameState gameState = GameState::Splash_Init;
 GameStats gameStats;
+LevelSelectVars levelSelectVars;
 Player player;
 FallingTile fallingTiles[Constants::FallingTilesCount];
 Arrow arrows[3];
-
 uint8_t board[6][13];
 
 void setup() {
@@ -54,6 +54,15 @@ void loop() {
 
         case GameState::Title:
             title();
+            break;
+
+        case GameState::LevelSelect_Init:
+            levelSelect_Init();
+            levelSelect();
+            break;
+
+        case GameState::LevelSelect:
+            levelSelect();
             break;
 
         case GameState::Instructions_Init:
