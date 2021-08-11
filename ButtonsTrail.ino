@@ -17,7 +17,9 @@ LevelSelectVars levelSelectVars;
 Player player;
 FallingTile fallingTiles[Constants::FallingTilesCount];
 Arrow arrows[3];
+
 uint8_t board[Constants::BoardHeight][Constants::BoardWidth];
+Particle particles[Constants::ParticlesMax];
 
 void setup() {
 

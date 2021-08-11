@@ -137,19 +137,40 @@ void game() {
         Sprites::drawExternalMask(59, 20, (stars > 1 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
         Sprites::drawExternalMask(73, 20, (stars > 2 ? Images::Star_Filled : Images::Star_Hollow), Images::Star_Mask, 0, 0);
 
-        Sprites::drawOverwrite(22, 32, Images::Congratulations, 0);
-        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level + 1);
-        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + gameStats.level), stars);
+        if (gameStats.level + 1 == Puzzles::Count) {
 
-        if (gameStats.maxLevel < gameStats.level + 1) {
-            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), gameStats.level + 1);
+            Sprites::drawOverwrite(37, 32, Images::EndOfGame, 0);
+            updateAndRenderParticles();
+
+            if (arduboy.isFrameCount(32)) launchParticles(random(32, 97), random(16, 48));
+
         }
+        else {
+
+            Sprites::drawOverwrite(22, 32, Images::Congratulations, 0);
+            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level + 1);
+            if (gameStats.maxLevel < gameStats.level + 1) {
+                eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max), gameStats.level + 1);
+            }
+
+        }
+
+        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Rating + gameStats.level), stars);
 
         if (arduboy.justPressed(A_BUTTON)) {
 
-            gameStats.xOffset = 4;
-            gameStats.level++;
-            gameStats.moves = 0;
+            if (gameStats.level + 1 == Puzzles::Count) {
+
+                gameState = GameState::Title_Init;
+
+            }
+            else {
+
+                gameStats.xOffset = 4;
+                gameStats.level++;
+                gameStats.moves = 0;
+
+            }
 
         }
 

@@ -17,6 +17,8 @@ namespace Constants {
     constexpr uint16_t EEPROM_Level_Max = EEPROM_Char1 + 3;
     constexpr uint16_t EEPROM_Level_Rating = EEPROM_Char1 + 4;
 
+    constexpr uint8_t ParticlesMax = 30;
+
 }
 
 enum class GameState : uint8_t {
