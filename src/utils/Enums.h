@@ -3,17 +3,19 @@
 namespace Constants {
 
     constexpr uint8_t FallingTilesCount = 5;
-    constexpr uint8_t BoardWidth = 13;
+    constexpr uint8_t BoardWidth = 15;
     constexpr uint8_t BoardHeight = 6;
     constexpr uint8_t CellWidth = 7;
-    constexpr uint8_t CellWidth_PlusBorder = 9;
+    constexpr uint8_t CellWidth_PlusBorder = 8;
 
-    constexpr uint8_t Board_XOffset = 6;
-    constexpr uint8_t Board_YOffset = 9;
+    constexpr uint8_t Board_XOffset = 4;
+    constexpr uint8_t Board_YOffset = 13;
 
-    constexpr uint16_t EEPROM_Char1 = 28;
-    constexpr uint16_t EEPROM_Char2 = 29;
-    constexpr uint16_t EEPROM_Level = 30;
+    constexpr uint16_t EEPROM_Char1 = 27;
+    constexpr uint16_t EEPROM_Char2 = EEPROM_Char1 + 1;
+    constexpr uint16_t EEPROM_Level_Current = EEPROM_Char1 + 2;
+    constexpr uint16_t EEPROM_Level_Max = EEPROM_Char1 + 3;
+    constexpr uint16_t EEPROM_Level_Rating = EEPROM_Char1 + 4;
 
 }
 
@@ -22,6 +24,10 @@ enum class GameState : uint8_t {
     Splash,
     Title_Init,
     Title,
+    LevelSelect_Init,
+    LevelSelect,
+    Instructions_Init,
+    Instructions,
     Game_Init,
     Game,
 };

@@ -114,7 +114,7 @@ Font3x5::Font3x5(uint8_t lineHeight) {
 size_t Font3x5::write(uint8_t c) {
 
   if (c == '\n')     { _cursorX = _baseX; _cursorY += _lineHeight; }
-  else if (c == '~')      { _cursorX += 1; }
+  else if (c == '~')      { _cursorX += 2; }
   else {
 
     printChar(c, _cursorX, _cursorY);
