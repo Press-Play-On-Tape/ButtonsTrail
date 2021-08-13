@@ -16,6 +16,7 @@ namespace Constants {
     constexpr uint16_t EEPROM_Level_Current = EEPROM_Char1 + 2;
     constexpr uint16_t EEPROM_Level_Max = EEPROM_Char1 + 3;
     constexpr uint16_t EEPROM_Level_Rating = EEPROM_Char1 + 4;
+    constexpr uint16_t EEPROM_Tile_Set = EEPROM_Char1 + 54;
 
     constexpr uint8_t ParticlesMax = 30;
 

@@ -340,7 +340,7 @@ void renderBoard() {
 
             Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (x * Constants::CellWidth_PlusBorder), 
                                       Constants::Board_YOffset + (y * Constants::CellWidth_PlusBorder) + gameStats.yOffset, 
-                                      Images::Tiles, Images::Tile_Mask, board[y][x], 0);
+                                      Images::Tiles, Images::Tile_Mask, board[y][x] + (gameStats.tileSet * 7), 0);
 
         }
 

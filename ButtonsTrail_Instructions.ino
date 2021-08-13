@@ -79,15 +79,15 @@ void instructions() {
             font3x5.setCursor(0, 13);
             font3x5.print("Floor Tiles");
 
-            Sprites::drawOverwrite(0, 27, Images::Tiles, 1);
+            Sprites::drawOverwrite(0, 27, Images::Tiles, 1 + (gameStats.tileSet * 7));
             font3x5.setCursor(10, 27);
             font3x5.print("Normal:~falls~away~once~crossed.");
 
-            Sprites::drawOverwrite(0, 39, Images::Tiles, 4);
+            Sprites::drawOverwrite(0, 39, Images::Tiles, 4 + (gameStats.tileSet * 7));
             font3x5.setCursor(10, 39);
             font3x5.print("Double:~can~be~crossed~twice.");
 
-            Sprites::drawOverwrite(0, 51, Images::Tiles, 3);
+            Sprites::drawOverwrite(0, 51, Images::Tiles, 3 + (gameStats.tileSet * 7));
             font3x5.setCursor(10, 51);
             font3x5.print("Solid:~never~falls~when~crossed.");
             break;
@@ -99,11 +99,11 @@ void instructions() {
             font3x5.setCursor(0, 13);
             font3x5.print("Button Switches");
 
-            Sprites::drawOverwrite(0, 27, Images::Tiles, 5);
+            Sprites::drawOverwrite(0, 27, Images::Tiles, 5 + (gameStats.tileSet * 7));
             font3x5.setCursor(10, 27);
             font3x5.print("Off:~switch~is~in~OFF~position.");
 
-            Sprites::drawOverwrite(0, 39, Images::Tiles, 6);
+            Sprites::drawOverwrite(0, 39, Images::Tiles, 6 + (gameStats.tileSet * 7));
             font3x5.setCursor(10, 39);
             font3x5.print("On:~switch~is~in~ON~position.");
 

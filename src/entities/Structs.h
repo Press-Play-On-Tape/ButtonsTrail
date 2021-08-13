@@ -19,6 +19,7 @@ struct GameStats {
         uint8_t instruction = 0;
         uint8_t start = 0;
         uint8_t exit = 0;
+        uint8_t tileSet = 0;
         bool endOfGame = false;
 
         void reset() {

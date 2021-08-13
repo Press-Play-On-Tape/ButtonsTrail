@@ -7,6 +7,7 @@ void title_Init() {
 
     uint8_t maxLevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max));
     uint8_t curlevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current));
+    gameStats.tileSet = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current)) > 0 ? 1 : 0;
 
     gameStats.titleSel = maxLevel > 0 ? 1 : 0;
     gameStats.maxLevel = maxLevel;
@@ -49,14 +50,33 @@ void title() {
             gameState = GameState::LevelSelect_Init;
         }
 
-        // eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current), gameStats.level);
-
     }         
+
+
+    // Change tilest ..
+    
+    if (arduboy.pressed(B_BUTTON)) { 
+
+        gameStats.exit++;
+
+        if (gameStats.exit == 32) {
+
+            gameStats.tileSet = gameStats.tileSet == 1 ? 0 : 1;
+            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Tile_Set), gameStats.tileSet);
+            gameStats.exit == 0;
+
+        }
+    }
+    else {
+
+        gameStats.exit = 0;
+
+    }
 
 
     // Render page ..
 
-    Sprites::drawOverwrite(9, 9, Images::Title, 0);
+    Sprites::drawOverwrite(9, 9, Images::Title, gameStats.tileSet);
     Sprites::drawOverwrite(25, 49, Images::Title_New, 0);
 
     if (gameStats.maxLevel > 0) {
