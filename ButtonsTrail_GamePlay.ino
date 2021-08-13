@@ -7,8 +7,10 @@ void game_Init() {
 
     gameStats.reset();
     gameState = GameState::Game;
-    gameStats.xOffset = 132;
+
+    gameStats.xOffset = -132;
     gameStats.exit = 0;
+    gameStats.endOfGame = false;
     
 }   
 
@@ -18,7 +20,14 @@ void game_Init() {
 //
 void game() {
 
-    bool isEndOfGame = endOfGame();
+    if (endOfGame() && !gameStats.endOfGame) {
+        gameStats.endOfGame = true;
+
+        #ifdef SOUNDS
+        sound.tones(Sounds::Positive);
+        #endif
+
+    }
 
 
     // Update scrolling motion ..
@@ -70,7 +79,7 @@ void game() {
 
     }
 
-    if (gameStats.xOffset == 0 && !player.isMoving() && !isEndOfGame) {
+    if (gameStats.xOffset == 0 && !player.isMoving() && !gameStats.endOfGame) {
 
         if (arduboy.justPressed(LEFT_BUTTON) && player.getX() > -1)                             { player.moveLeft();   gameStats.moves++;   removeTile(); } 
         else if (arduboy.justPressed(RIGHT_BUTTON) && player.getX() < Constants::BoardWidth)    { player.moveRight();  gameStats.moves++;   removeTile(); } 
@@ -82,16 +91,24 @@ void game() {
 
     // Is the player on a 'blank' tile?
 
-    if (!player.isDying() && (player.getXNew() < 0 || player.getXNew() == Constants::BoardWidth || player.getYNew() < 0 || player.getYNew() == Constants::BoardHeight || board[player.getYNew()][player.getXNew()] == 0)) {
+    if (!player.isDying() && (player.getXNew() < 0 || player.getXNew() == Constants::BoardWidth || player.getYNew() < 0 || player.getYNew() == Constants::BoardHeight || board[player.getYNew()][player.getXNew()] == static_cast<uint8_t>(Tiles::None))) {
 
         player.kill();
+        
+        if (gameStats.xOffset == 0) {
+
+            #ifdef SOUNDS
+            sound.tones(Sounds::Death);
+            #endif
+
+        }
 
     }
     
             
     // Render board ..
 
-    if (!isEndOfGame) renderBoard();
+    if (!gameStats.endOfGame) renderBoard();
     renderHUD();
 
 
@@ -124,7 +141,7 @@ void game() {
         
     }
 
-    if (isEndOfGame) {
+    if (gameStats.endOfGame) {
 
         uint8_t stars = 0;
 
@@ -169,6 +186,7 @@ void game() {
                 gameStats.xOffset = 4;
                 gameStats.level++;
                 gameStats.moves = 0;
+                gameStats.endOfGame = false;
 
             }
 
@@ -183,6 +201,10 @@ void removeTile() {
     switch (static_cast<Tiles>(board[player.getY()][player.getX()])) {
 
         case Tiles::NormalFloor:
+
+            #ifdef SOUNDS
+            sound.tones(Sounds::Tone_01);
+            #endif
 
             board[player.getY()][player.getX()] = static_cast<uint8_t>(Tiles::None);
            
@@ -201,20 +223,36 @@ void removeTile() {
 
         case Tiles::DoubleFloor:
 
+            #ifdef SOUNDS
+            sound.tones(Sounds::Tone_02);
+            #endif
+
             board[player.getY()][player.getX()] = static_cast<uint8_t>(Tiles::NormalFloor);
             break;
 
         case Tiles::Button1:
+
+            #ifdef SOUNDS
+            sound.tones(Sounds::Tone_03);
+            #endif
 
             board[player.getY()][player.getX()] = static_cast<uint8_t>(Tiles::Button2);
             break;
 
         case Tiles::Button2:
 
+            #ifdef SOUNDS
+            sound.tones(Sounds::Tone_03);
+            #endif
+
             board[player.getY()][player.getX()] = static_cast<uint8_t>(Tiles::Button1);
             break;
 
-        default: break;
+        default: 
+            #ifdef SOUNDS
+            sound.tones(Sounds::Tone_01);
+            #endif
+            break;
 
     }
     
@@ -277,6 +315,7 @@ void initGame(uint8_t level) {
     // Scroll in ..
 
     gameStats.xOffset = -132;
+    gameStats.endOfGame = false;
 
 
     // If last row is all zeroes we can render the board down 6px ..

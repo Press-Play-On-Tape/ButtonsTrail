@@ -1,16 +1,30 @@
 #include "src/utils/Arduboy2Ext.h"
 #include <Sprites.h>
+
 #include "src/images/Images.h"
 #include "src/puzzles/Puzzles.h"
 #include "src/utils/Enums.h"
-#include "src/entities/Entities.h"
 #include "src/utils/Utils.h"
-#include "src/fonts/Font3x5.h"
 #include "src/utils/EEPROM_Utils.h"
+#include "src/entities/Entities.h"
+#include "src/fonts/Font3x5.h"
+
+
+#define SOUNDS
+
+#ifdef SOUNDS
+#include <ArduboyTones.h>
+#include "src/sounds/Sounds.h"
+#endif
+
 
 Arduboy2Ext arduboy;
-
 Font3x5 font3x5 = Font3x5();
+
+#ifdef SOUNDS
+ArduboyTones sound(arduboy.audio.enabled);
+#endif
+
 GameState gameState = GameState::Splash_Init;
 GameStats gameStats;
 LevelSelectVars levelSelectVars;
