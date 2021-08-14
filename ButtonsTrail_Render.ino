@@ -183,7 +183,7 @@ void renderBoard_Normal() {
 
 void renderHUD() {
 
-    arduboy.fillRect(0, 0, 128, 9, BLACK);
+    arduboy.fillRect(0, 0, 128, 10, BLACK);
 
     Sprites::drawOverwrite(0, 0, Images::Level, 0);
 
