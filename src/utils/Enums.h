@@ -7,9 +7,10 @@ namespace Constants {
     constexpr uint8_t BoardHeight = 6;
     constexpr uint8_t CellWidth = 7;
     constexpr uint8_t CellWidth_PlusBorder = 8;
+    constexpr uint8_t CellHeight_PlusBorder = 6;
 
     constexpr uint8_t Board_XOffset = 4;
-    constexpr uint8_t Board_YOffset = 13;
+    constexpr uint8_t Board_YOffset = 15;
 
     constexpr uint16_t EEPROM_Char1 = 27;
     constexpr uint16_t EEPROM_Char2 = EEPROM_Char1 + 1;

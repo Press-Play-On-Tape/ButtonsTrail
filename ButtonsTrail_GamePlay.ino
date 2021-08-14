@@ -338,9 +338,11 @@ void renderBoard() {
 
         for (uint16_t x = 0; x < Constants::BoardWidth; x++){
 
-            Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (x * Constants::CellWidth_PlusBorder), 
-                                      Constants::Board_YOffset + (y * Constants::CellWidth_PlusBorder) + gameStats.yOffset, 
-                                      Images::Tiles, Images::Tile_Mask, board[y][x] + (gameStats.tileSet * 7), 0);
+            if (board[y][x] > static_cast<uint8_t>(Tiles::None)) {
+                Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (x * Constants::CellWidth_PlusBorder), 
+                                        Constants::Board_YOffset + (y * Constants::CellHeight_PlusBorder) + gameStats.yOffset, 
+                                        Images::Tiles, Images::Tile_Mask, board[y][x] + (gameStats.tileSet * 7), 0);
+            }
 
         }
 
@@ -354,7 +356,7 @@ void renderBoard() {
         if (fallingTile.isActive()) {
 
             Sprites::drawExternalMask(Constants::Board_XOffset + (fallingTile.getX() * Constants::CellWidth_PlusBorder), 
-                                      Constants::Board_YOffset + (fallingTile.getY() * Constants::CellWidth_PlusBorder) + fallingTile.getYOffset() + gameStats.yOffset, 
+                                      Constants::Board_YOffset + (fallingTile.getY() * Constants::CellHeight_PlusBorder) + fallingTile.getYOffset() + gameStats.yOffset, 
                                       Images::Player_Dying, Images::Player_Mask, 0, 0);
             
         }
@@ -369,7 +371,7 @@ void renderBoard() {
         if (arrow.getX() > 0 || arrow.getY() > 0) {
     
             Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (arrow.getX() * Constants::CellWidth_PlusBorder) - 1, 
-                                    Constants::Board_YOffset + (arrow.getY() * Constants::CellWidth_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
+                                    Constants::Board_YOffset + (arrow.getY() * Constants::CellHeight_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
                                     Images::Arrow, Images::Arrow_Mask, 0, 0);
 
 
@@ -389,27 +391,27 @@ void renderBoard() {
             if (player.isMoving()) {
 
                 Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder) + player.getXOffset(), 
-                                          Constants::Board_YOffset + (player.getY() * Constants::CellWidth_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
+                                          Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
                                           Images::Player, Images::Player_Mask, frame, frame);
 
             }
             else {
 
                 Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder), 
-                                          Constants::Board_YOffset + (player.getY() * Constants::CellWidth_PlusBorder) + player.getYDyingOffset_1() + gameStats.yOffset - 1, 
+                                          Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYDyingOffset_1() + gameStats.yOffset - 1, 
                                           Images::Player_Dying, Images::Player_Mask, frame, frame);
 
             }
     
             Sprites::drawExternalMask(Constants::Board_XOffset + (player.getXOld() * Constants::CellWidth_PlusBorder), 
-                                      Constants::Board_YOffset + (player.getYOld() * Constants::CellWidth_PlusBorder) + player.getYDyingOffset_2() + gameStats.yOffset - 1, 
+                                      Constants::Board_YOffset + (player.getYOld() * Constants::CellHeight_PlusBorder) + player.getYDyingOffset_2() + gameStats.yOffset - 1, 
                                       Images::Player_Dying, Images::Player_Mask, frame, frame);
 
         }
         else {
 
             Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder) + player.getXOffset(), 
-                                      Constants::Board_YOffset + (player.getY() * Constants::CellWidth_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
+                                      Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
                                       Images::Player, Images::Player_Mask, frame, frame);
 
         }
