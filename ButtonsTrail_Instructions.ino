@@ -18,7 +18,7 @@ void instructions() {
 
     // Delay for 'good luck' ..
 
-    if (gameStats.start < 24) { gameStats.start++; }
+    if (gameStats.start < 56) { gameStats.start++; }
 
 
     // Handle player actions ..
@@ -107,10 +107,16 @@ void instructions() {
             font3x5.setCursor(10, 39);
             font3x5.print("On:~switch~is~in~ON~position.");
 
-            if (gameStats.start >= 24) {
+            if (gameStats.start >= 56) {
             
                 font3x5.setCursor(33, 56);
                 font3x5.print("Press~A~to~start~!");
+
+            }
+            else {
+            
+                font3x5.setCursor(13, 56);
+                font3x5.print("Hold~A~to~zoom~and~B~to~quit.");
 
             }
 

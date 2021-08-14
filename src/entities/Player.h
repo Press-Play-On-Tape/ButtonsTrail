@@ -112,13 +112,16 @@ class Player {
 
         }
 
-        bool update() {
+        bool update(bool zoom) {
+
+            uint8_t increment = zoom ? 3 : 2;
+            uint8_t xOffsetMax = zoom ? 12 : 8;
 
             if (this->x != this->xNew) {
 
-                this->xOffset = this->xOffset + (this->x > this->xNew ? -2 : 2);
+                this->xOffset = this->xOffset + (this->x > this->xNew ? -increment : increment);
 
-                if (absT(this->xOffset) == 8) {
+                if (absT(this->xOffset) == xOffsetMax) {
 
                     this->xOffset = 0;
                     this->x = this->xNew;
@@ -130,9 +133,9 @@ class Player {
 
             if (this->y != this->yNew) {
 
-                this->yOffset = this->yOffset + (this->y > this->yNew ? -2 : 2);
+                this->yOffset = this->yOffset + (this->y > this->yNew ? -increment : increment);
 
-                if (absT(this->yOffset) == 8) {
+                if (absT(this->yOffset) == xOffsetMax) {
 
                     this->yOffset = 0;
                     this->y = this->yNew;
@@ -144,9 +147,9 @@ class Player {
 
             if (this->dying) {
 
-                if (!this->moving) this->yDyingOffset_1 = this->yDyingOffset_1 + 2;
+                if (!this->moving) this->yDyingOffset_1 = this->yDyingOffset_1 + increment;
 
-                this->yDyingOffset_2 = yDyingOffset_2 + 2;
+                this->yDyingOffset_2 = yDyingOffset_2 + increment;
 
                 if (this->yDyingOffset_1 > 64 && yDyingOffset_2 > 64) {
 
