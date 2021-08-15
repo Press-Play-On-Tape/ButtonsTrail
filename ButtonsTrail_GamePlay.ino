@@ -68,26 +68,26 @@ void game() {
 
     }
 
-    // if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
-    // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
-    // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
+    if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
+    if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
+    if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
     
-    if (arduboy.pressed(B_BUTTON)) { // Exit
+    // if (arduboy.pressed(B_BUTTON)) { // Exit
 
-        gameStats.exit++;
+    //     gameStats.exit++;
 
-        if (gameStats.exit == 32) {
+    //     if (gameStats.exit == 32) {
 
-            gameState = GameState::Title_Init;
-            gameStats.exit = 0;
+    //         gameState = GameState::Title_Init;
+    //         gameStats.exit = 0;
 
-        }
-    }
-    else {
+    //     }
+    // }
+    // else {
 
-        gameStats.exit = 0;
+    //     gameStats.exit = 0;
 
-    }
+    // }
 
     if (gameStats.xOffset == 0 && !player.isMoving() && !gameStats.endOfGame) {
 
