@@ -10,7 +10,7 @@ namespace Puzzles {
     // 5 Button floor #1
     // 6 Button floor #2
 
-    constexpr uint8_t Count = 27;
+    constexpr uint8_t Count = 30;
 
     //  0  1  2  3  4  5  6  7  8  9  0  1  2
     const byte PROGMEM Puzzle_00[] = {
@@ -365,6 +365,45 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 5, 0, 5, 5, 6, 0, 0, 0, 0,
     };
 
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    const byte PROGMEM Puzzle_27[] = {
+        13, 0, // Starting Pos
+        0, 0, 0, 0, // Arrows
+        41, // Minimum moves
+        0, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 4, 1, 2, 0, 
+        0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 
+        0, 2, 1, 4, 1, 1, 1, 1, 4, 1, 1, 4, 1, 2, 0, 
+        0, 6, 0, 6, 0, 0, 6, 0, 1, 0, 0, 1, 0, 5, 0, 
+        0, 5, 1, 5, 0, 0, 5, 6, 1, 0, 0, 1, 6, 5, 0, 
+        0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
+    };
+
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    const byte PROGMEM Puzzle_28[] = {
+        5, 5, // Starting Pos
+        0, 0, 0, 0, // Arrows
+        64, // Minimum moves
+        6, 5, 1, 4, 2, 1, 1, 5, 1, 1, 2, 4, 1, 1, 2, 
+        5, 6, 0, 5, 0, 2, 0, 0, 2, 0, 0, 6, 5, 0, 1, 
+        0, 1, 0, 0, 0, 1, 5, 1, 1, 0, 0, 5, 0, 0, 1, 
+        0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 
+        6, 5, 0, 0, 0, 1, 1, 5, 1, 0, 0, 0, 0, 6, 6, 
+        5, 6, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 5, 6, 
+    };
+
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    const byte PROGMEM Puzzle_29[] = {
+        0, 3, // Starting Pos
+        0, 0, 0, 0, // Arrows
+        60, // Minimum moves
+        0, 0, 0, 5, 6, 5, 0, 0, 5, 1, 5, 0, 5, 6, 5, 
+        0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2, 
+        0, 2, 1, 1, 0, 2, 1, 1, 5, 6, 4, 1, 1, 1, 4, 
+        1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 
+        0, 5, 1, 1, 1, 4, 6, 1, 5, 2, 1, 5, 6, 1, 1, 
+        0, 0, 0, 0, 0, 5, 1, 0, 5, 6, 1, 0, 5, 0, 0, 
+    };
+
     const uint8_t* const puzzles[] PROGMEM = { 
         Puzzle_00, Puzzle_01, Puzzle_02, Puzzle_03, 
         Puzzle_04, Puzzle_05, Puzzle_06, Puzzle_07,
@@ -372,7 +411,8 @@ namespace Puzzles {
         Puzzle_12, Puzzle_13, Puzzle_14, Puzzle_15,
         Puzzle_16, Puzzle_17, Puzzle_18, Puzzle_19,
         Puzzle_20, Puzzle_21, Puzzle_22, Puzzle_23,
-        Puzzle_24, Puzzle_25, Puzzle_26,
+        Puzzle_24, Puzzle_25, Puzzle_26, Puzzle_27,
+        Puzzle_28, Puzzle_29,
         };
 
 }
