@@ -7,6 +7,7 @@ void game_Init() {
 
     gameStats.reset();
     gameState = GameState::Game;
+    gameStats.zoom = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Zoom)) > 0 ? 1 : 0;
 
     gameStats.xOffset = -132;
     gameStats.exit = 0;
@@ -21,6 +22,7 @@ void game_Init() {
 void game() {
 
     if (endOfGame() && !gameStats.endOfGame) {
+
         gameStats.endOfGame = true;
 
         #ifdef SOUNDS
@@ -59,6 +61,25 @@ void game() {
 
     // Handle player movements ..
 
+    if (arduboy.pressed(A_BUTTON)) { // Exit
+Serial.println("switch");
+        gameStats.zoomCount++;
+
+        if (gameStats.zoomCount == 16) {
+
+            gameStats.zoom = gameStats.zoom > 0 ? 0 : 1;
+            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Zoom), gameStats.zoom);
+            gameStats.zoomCount = 0;
+
+        }
+
+    }
+    else {
+
+        gameStats.zoomCount = 0;
+
+    }
+
     // if (arduboy.justPressed(B_BUTTON)) gameStats.moves = 0;// SJH remove
     // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(UP_BUTTON)) { gameStats.level--; initGame(gameStats.level); }// SJH remove
     // if (arduboy.pressed(B_BUTTON) && arduboy.justPressed(DOWN_BUTTON)) { gameStats.level++; initGame(gameStats.level); }// SJH remove
@@ -67,9 +88,10 @@ void game() {
 
         gameStats.exit++;
 
-        if (gameStats.exit > 32) {
+        if (gameStats.exit == 32) {
 
             gameState = GameState::Title_Init;
+            gameStats.exit = 0;
 
         }
     }
@@ -108,13 +130,22 @@ void game() {
             
     // Render board ..
 
-    if (!gameStats.endOfGame) renderBoard();
+    if (!gameStats.endOfGame) {
+
+        if (gameStats.zoom) {
+            renderBoard_Zoom();
+        }
+        else {
+            renderBoard_Normal();
+        }
+
+    }
     renderHUD();
 
 
     // Update the game state ..
 
-    if (player.update() && gameStats.xOffset == 0) {
+    if (player.update(gameStats.zoom) && gameStats.xOffset == 0) {
     
         gameStats.xOffset = 4;
 
@@ -329,147 +360,6 @@ void initGame(uint8_t level) {
     }
 
     gameStats.yOffset = count == Constants::BoardWidth ? 6 : 0;
-
-}
-
-void renderBoard() {
-
-    for (uint16_t y = 0; y < Constants::BoardHeight; y++){
-
-        for (uint16_t x = 0; x < Constants::BoardWidth; x++){
-
-            if (board[y][x] > static_cast<uint8_t>(Tiles::None)) {
-                Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (x * Constants::CellWidth_PlusBorder), 
-                                        Constants::Board_YOffset + (y * Constants::CellHeight_PlusBorder) + gameStats.yOffset, 
-                                        Images::Tiles, Images::Tile_Mask, board[y][x] + (gameStats.tileSet * 7), 0);
-            }
-
-        }
-
-    }
-
-
-    // Render falling tiles ..
-                
-    for (FallingTile &fallingTile : fallingTiles) {
-
-        if (fallingTile.isActive()) {
-
-            Sprites::drawExternalMask(Constants::Board_XOffset + (fallingTile.getX() * Constants::CellWidth_PlusBorder), 
-                                      Constants::Board_YOffset + (fallingTile.getY() * Constants::CellHeight_PlusBorder) + fallingTile.getYOffset() + gameStats.yOffset, 
-                                      Images::Player_Dying, Images::Player_Mask, 0, 0);
-            
-        }
-
-    }
-
-
-    // Render arrows .. (if defined)
-
-    for (Arrow &arrow : arrows) {
-
-        if (arrow.getX() > 0 || arrow.getY() > 0) {
-    
-            Sprites::drawExternalMask(Constants::Board_XOffset + gameStats.xOffset + (arrow.getX() * Constants::CellWidth_PlusBorder) - 1, 
-                                    Constants::Board_YOffset + (arrow.getY() * Constants::CellHeight_PlusBorder) + arrow.getYOffset() + gameStats.yOffset - 1, 
-                                    Images::Arrow, Images::Arrow_Mask, 0, 0);
-
-
-        }
-
-    }
-
-
-    // Render player ..
-
-    if (gameStats.xOffset == 0) {
-
-        uint8_t frame = arduboy.getFrameCount(32) / 8;
-
-        if (player.isDying()) {
-
-            if (player.isMoving()) {
-
-                Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder) + player.getXOffset(), 
-                                          Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
-                                          Images::Player, Images::Player_Mask, frame, frame);
-
-            }
-            else {
-
-                Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder), 
-                                          Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYDyingOffset_1() + gameStats.yOffset - 1, 
-                                          Images::Player_Dying, Images::Player_Mask, frame, frame);
-
-            }
-    
-            Sprites::drawExternalMask(Constants::Board_XOffset + (player.getXOld() * Constants::CellWidth_PlusBorder), 
-                                      Constants::Board_YOffset + (player.getYOld() * Constants::CellHeight_PlusBorder) + player.getYDyingOffset_2() + gameStats.yOffset - 1, 
-                                      Images::Player_Dying, Images::Player_Mask, frame, frame);
-
-        }
-        else {
-
-            Sprites::drawExternalMask(Constants::Board_XOffset + (player.getX() * Constants::CellWidth_PlusBorder) + player.getXOffset(), 
-                                      Constants::Board_YOffset + (player.getY() * Constants::CellHeight_PlusBorder) + player.getYOffset() + gameStats.yOffset - 1, 
-                                      Images::Player, Images::Player_Mask, frame, frame);
-
-        }
-        
-    }
-
-}
-
-
-void renderHUD() {
-
-    arduboy.fillRect(0, 0, 128, 9, BLACK);
-
-    Sprites::drawOverwrite(0, 0, Images::Level, 0);
-
-    {
-        uint8_t digits[3] = {};
-        uint8_t x = 45;
-
-        extractDigits(digits, gameStats.level);
-
-        for (uint8_t i = 0; i < 3; ++i) {
-
-            if (digits[i] == 1) x = x - 3;
-
-        }
-
-        for (uint8_t i = 0; i < 3; ++i) {
-            Sprites::drawOverwrite(x, 0, Images::Numbers, digits[i]);
-            x = x - (digits[i] == 1 ? 5 : 8);
-        }
-
-    }
-
-
-    Sprites::drawOverwrite(71, 0, Images::Moves, 0);
-
-    {
-        uint8_t digits[3] = {};
-        uint8_t x = 121;
-
-        extractDigits(digits, gameStats.moves < 999 ? gameStats.moves : 999);
-
-        for (uint8_t i = 0; i < 3; ++i) {
-
-            if (digits[i] == 1) x = x - 3;
-
-        }
-        
-        for (uint8_t i = 0; i < 3; ++i) {
-            Sprites::drawOverwrite(x, 0, Images::Numbers, digits[i]);
-            x = x - (digits[i] == 1 ? 5 : 8);
-        }
-
-    }
-
-    arduboy.drawFastHLine(0, 8, 128, WHITE);
-
 
 }
 

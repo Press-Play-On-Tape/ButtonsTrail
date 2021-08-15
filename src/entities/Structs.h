@@ -21,6 +21,8 @@ struct GameStats {
         uint8_t exit = 0;
         uint8_t tileSet = 0;
         bool endOfGame = false;
+        bool zoom = false;
+        uint8_t zoomCount = 0;
 
         void reset() {
 

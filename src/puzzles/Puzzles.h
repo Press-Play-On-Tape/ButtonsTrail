@@ -15,7 +15,7 @@ namespace Puzzles {
     //  0  1  2  3  4  5  6  7  8  9  0  1  2
     const byte PROGMEM Puzzle_00[] = {
         3, 5, // Starting Pos
-        11, 3, 0, 0, // Arrows
+        11, 2, 0, 0, // Arrows
         20, // Minimum moves
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         0, 0, 0, 0, 0, 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 
@@ -28,7 +28,7 @@ namespace Puzzles {
     //  0  1  2  3  4  5  6  7  8  9  0  1  2
     const byte PROGMEM Puzzle_01[] = {
         2, 3, // Starting Pos
-        7, 1, 12, 1, // Arrows
+        7, 0, 12, 0, // Arrows
         10, // Minimum moves
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
