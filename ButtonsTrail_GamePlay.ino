@@ -61,22 +61,10 @@ void game() {
 
     // Handle player movements ..
 
-    if (arduboy.pressed(A_BUTTON)) { // Exit
-Serial.println("switch");
-        gameStats.zoomCount++;
+    if (arduboy.justPressed(A_BUTTON)) {
 
-        if (gameStats.zoomCount == 16) {
-
-            gameStats.zoom = gameStats.zoom > 0 ? 0 : 1;
-            eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Zoom), gameStats.zoom);
-            gameStats.zoomCount = 0;
-
-        }
-
-    }
-    else {
-
-        gameStats.zoomCount = 0;
+        gameStats.zoom = gameStats.zoom > 0 ? 0 : 1;
+        eeprom_update_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Zoom), gameStats.zoom);
 
     }
 

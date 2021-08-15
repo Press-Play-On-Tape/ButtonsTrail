@@ -10,8 +10,6 @@
 #include "src/fonts/Font3x5.h"
 
 
-#define SOUNDS
-
 #ifdef SOUNDS
 #include <ArduboyTones.h>
 #include "src/sounds/Sounds.h"

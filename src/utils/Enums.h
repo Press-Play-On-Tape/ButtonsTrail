@@ -1,5 +1,7 @@
 #pragma once
 
+#define SOUNDS
+
 namespace Constants {
 
     constexpr uint8_t FallingTilesCount = 5;
