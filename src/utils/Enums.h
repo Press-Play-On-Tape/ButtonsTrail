@@ -1,6 +1,6 @@
 #pragma once
 
-#define _SOUNDS
+#define SOUNDS
 
 namespace Constants {
 

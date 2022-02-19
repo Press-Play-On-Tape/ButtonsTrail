@@ -7,7 +7,7 @@ void title_Init() {
 
     uint8_t maxLevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Max));
     uint8_t curlevel = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Level_Current));
-    gameStats.tileSet = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Tile_Set)) > 0 ? 1 : 0;
+    gameStats.tileSet = eeprom_read_byte(reinterpret_cast<uint8_t *>(Constants::EEPROM_Tile_Set)) == 1 ? 0 : 1;
 
     gameStats.titleSel = maxLevel > 0 ? 1 : 0;
     gameStats.maxLevel = maxLevel;

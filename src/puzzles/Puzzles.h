@@ -12,7 +12,7 @@ namespace Puzzles {
 
     constexpr uint8_t Count = 30;
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_00[] = {
         3, 5, // Starting Pos
         11, 2, 0, 0, // Arrows
@@ -25,7 +25,7 @@ namespace Puzzles {
         0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 5, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_01[] = {
         2, 3, // Starting Pos
         7, 0, 12, 0, // Arrows
@@ -38,7 +38,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_02[] = {
         7, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -51,7 +51,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_03[] = {
         4, 3, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -64,7 +64,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_04[] = {
         5, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -77,7 +77,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_05[] = {
         6, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -90,7 +90,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_06[] = {
         3, 3, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -103,7 +103,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_07[] = {
         3, 3, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -116,7 +116,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 5, 1, 6, 1, 1, 5, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_08[] = {
         3, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -129,7 +129,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_09[] = {
         7, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -142,7 +142,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_10[] = {
         5, 3, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -155,7 +155,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 1, 1, 4, 1, 1, 1, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_11[] = {
         3, 1, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -168,7 +168,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_12[] = {
         3, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -181,7 +181,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 6, 1, 5, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_13[] = {
         7, 3, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -194,7 +194,7 @@ namespace Puzzles {
         0, 0, 0, 5, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_14[] = {
         4, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -207,7 +207,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 1, 1, 5, 1, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_15[] = {
         3, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -220,7 +220,7 @@ namespace Puzzles {
         0, 0, 0, 0, 5, 1, 1, 1, 4, 1, 5, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_16[] = {
         3, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -233,7 +233,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1, 1, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_17[] = {
         4, 4, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -246,7 +246,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 5, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_18[] = {
         3, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -259,7 +259,7 @@ namespace Puzzles {
         0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_19[] = {
         10, 0, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -272,7 +272,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 5, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_20[] = {
         8, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -285,7 +285,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 1, 5, 1, 5, 6, 5, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_21[] = {
         2, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -299,7 +299,7 @@ namespace Puzzles {
     };
 
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_22[] = {
         2, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -313,7 +313,7 @@ namespace Puzzles {
     };
 
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_23[] = {
         6, 2, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -326,7 +326,7 @@ namespace Puzzles {
         0, 0, 0, 1, 5, 1, 5, 1, 5, 1, 0, 0, 0, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_24[] = {
         0, 5, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -365,7 +365,7 @@ namespace Puzzles {
         0, 0, 0, 0, 0, 0, 5, 0, 5, 5, 6, 0, 0, 0, 0,
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_27[] = {
         13, 0, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -378,7 +378,7 @@ namespace Puzzles {
         0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_28[] = {
         5, 5, // Starting Pos
         0, 0, 0, 0, // Arrows
@@ -391,7 +391,7 @@ namespace Puzzles {
         5, 6, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 5, 6, 
     };
 
-    //  0  1  2  3  4  5  6  7  8  9  0  1  2
+    //  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
     const byte PROGMEM Puzzle_29[] = {
         0, 3, // Starting Pos
         0, 0, 0, 0, // Arrows

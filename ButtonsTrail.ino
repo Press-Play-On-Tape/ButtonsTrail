@@ -35,8 +35,10 @@ Particle particles[Constants::ParticlesMax];
 
 void setup() {
 
-    arduboy.begin();
+    arduboy.boot();
     arduboy.setFrameRate(30);
+	arduboy.flashlight();
+	arduboy.systemButtons();
     EEPROM_Utils::initEEPROM(false);
 
     #ifdef SOUNDS
