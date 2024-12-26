@@ -100,7 +100,7 @@ void game() {
 
     }
 
-    if (gameStats.xOffset == 0 && !player.isMoving() && !gameStats.endOfGame) {
+    if (gameStats.xOffset == 0 && !player.isMoving() && !gameStats.endOfGame && !player.isDying()) {
 
         if (arduboy.justPressed(LEFT_BUTTON) && player.getX() > -1)                             { player.moveLeft();   gameStats.moves++;   removeTile(); } 
         else if (arduboy.justPressed(RIGHT_BUTTON) && player.getX() < Constants::BoardWidth)    { player.moveRight();  gameStats.moves++;   removeTile(); } 

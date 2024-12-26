@@ -1,7 +1,7 @@
 {
-    "board": "arduboy-homemade:avr:arduboy-homemade",
+    "board": "arduboy-homemade:avr:arduboy-fx-devkit",
     "port": "/dev/tty.usbmodem14601",
     "sketch": "ButtonsTrail.ino",
     "output": "../build",
-    "configuration": "based_on=leonardo,boot=org,core=arduboy-core,display=sh1106,flashselect=sda,contrast=normal"
+    "configuration": "core=arduboy-core,boot=cathy3k"
 }
